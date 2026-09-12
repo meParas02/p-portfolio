@@ -24,11 +24,11 @@ export default function Contact({ personal, socials }: ContactProps) {
   ];
 
   return (
-    <section id="contact" className="section-defer border-b py-12 sm:py-16 lg:py-24">
+    <section id="contact" className="section-defer scroll-mt-24 border-b py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-container px-6 sm:px-8">
         <div className="flex items-baseline gap-4">
           <span className="font-mono text-xs text-highlight" aria-hidden="true">
-            06
+            05
           </span>
           <p className="font-mono text-xs uppercase tracking-label text-muted">Contact</p>
         </div>

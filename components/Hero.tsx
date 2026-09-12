@@ -11,7 +11,7 @@ export default function Hero({ personal }: HeroProps) {
   return (
     <section
       id="top"
-      className="border-b px-6 pt-24 pb-10 sm:px-8 sm:pt-28 sm:pb-12"
+      className="scroll-mt-24 border-b px-6 pt-24 pb-10 sm:px-8 sm:pt-28 sm:pb-12"
     >
       <div className="mx-auto w-full max-w-container">
         <p className="font-mono text-xs uppercase tracking-label text-muted">{meta}</p>

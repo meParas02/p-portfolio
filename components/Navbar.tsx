@@ -26,10 +26,8 @@ export default function Navbar({ name, sections, resumeUrl }: NavbarProps) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-colors duration-ui",
-        scrolled
-          ? "border-b bg-background/90 md:bg-background/70 md:backdrop-blur-xl"
-          : "border-b border-transparent"
+        "fixed inset-x-0 top-0 z-40 border-b bg-background/55 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-ui supports-[backdrop-filter]:bg-background/40",
+        scrolled ? "border-border" : "border-transparent"
       )}
     >
       <nav

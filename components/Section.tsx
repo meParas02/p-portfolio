@@ -40,7 +40,7 @@ export default function Section({
     <section
       id={id}
       className={cn(
-        "py-10 sm:py-14 lg:py-20",
+        "scroll-mt-24 py-10 sm:py-14 lg:py-20",
         bordered && "border-b",
         deferOffscreen && "section-defer",
         className

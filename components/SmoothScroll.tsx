@@ -52,11 +52,12 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     <ReactLenis
       root
       options={{
-        duration: 1.2,
-        lerp: 0.08,
+        duration: 0.9,
+        lerp: 0.1,
         smoothWheel: true,
         autoRaf: true,
         anchors: false,
+        stopInertiaOnNavigate: true,
         respectReducedMotion: false,
       }}
     >

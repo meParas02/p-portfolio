@@ -2,7 +2,6 @@ import resume from "@/data/resume.json";
 import type { NavSection, Resume } from "@/lib/types";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
@@ -21,7 +20,6 @@ export default function Home() {
       id: "education",
       label: "Education",
     },
-    (data.coreStrengths?.length ?? 0) > 0 && { id: "about", label: "Strengths" },
     { id: "contact", label: "Contact" },
   ].filter((s): s is NavSection => Boolean(s));
 
@@ -30,7 +28,7 @@ export default function Home() {
       <Navbar name={data.personal.name} sections={sections} resumeUrl={data.personal.resumeUrl} />
       <main>
         <Hero personal={data.personal} />
-        <Experience items={data.experience} />
+        <Experience items={data.experience} strengths={data.coreStrengths} />
         <Projects items={data.projects} />
         <Skills groups={data.skills} />
         <Education
@@ -38,7 +36,6 @@ export default function Home() {
           certifications={data.certifications}
           achievements={data.achievements}
         />
-        <About coreStrengths={data.coreStrengths} />
         <Contact personal={data.personal} socials={data.socials} />
       </main>
       <Footer personal={data.personal} />
