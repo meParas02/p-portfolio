@@ -1,0 +1,155 @@
+{
+  "personal": {
+    "name": "Paras Mehta",
+    "title": "Full-Stack Web Developer",
+    "tagline": "5+ Years of Experience",
+    "location": "Gujarat, India",
+    "email": "parasmehta1999@gmail.com",
+    "phone": "+91 94086 13459",
+    "resumeUrl": "/resume/Paras_Mehta_Resume.pdf"
+  },
+  "socials": [
+    {
+      "platform": "LinkedIn",
+      "url": "https://linkedin.com/in/paras-mehta-b1a00718a",
+      "icon": "linkedin"
+    },
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/meParas02",
+      "icon": "github"
+    },
+    {
+      "platform": "Email",
+      "url": "mailto:parasmehta1999@gmail.com",
+      "icon": "mail"
+    }
+  ],
+  "about": "Full-stack web developer with 5+ years of experience shipping production web applications in logistics, enterprise reporting, and Web3. Day-to-day work is React and TypeScript on the frontend with Java and PostgreSQL on the backend. I have taken products through micro-frontend migrations, built shared component libraries used across multiple modules, and handled real-time data, JWT/RBAC security, and test coverage. I use AI coding tools such as Cursor and Claude for prototyping, debugging, and documentation, and treat their output as a first draft to review rather than code to ship.",
+  "coreStrengths": [
+    "Micro-frontend architecture & shared component libraries",
+    "Real-time data with WebSockets / Socket.io",
+    "JWT authentication & role-based access control",
+    "AI-assisted development workflow (Cursor, Claude)"
+  ],
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": ["React", "Redux", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "SCSS", "Tailwind CSS", "Material UI (MUI)", "Micro-Frontends", "Webpack", "Responsive Design"]
+    },
+    {
+      "category": "Backend",
+      "items": ["Java", "REST API Design", "WebSockets (Socket.io)", "JWT Authentication", "Role-Based Access Control (RBAC)", "Microservices"]
+    },
+    {
+      "category": "Databases",
+      "items": ["PostgreSQL", "MongoDB", "SQL", "DBeaver"]
+    },
+    {
+      "category": "Testing",
+      "items": ["Jest", "React Testing Library (RTL)", "Unit Testing", "Integration Testing"]
+    },
+    {
+      "category": "Cloud & DevOps",
+      "items": ["Microsoft Azure", "Docker", "Git", "GitHub", "CI/CD Workflows"]
+    },
+    {
+      "category": "Tools & Practices",
+      "items": ["Jira", "Confluence", "Figma", "Postman", "VS Code", "Cursor AI", "Claude AI", "Agile / Scrum", "Code Review"]
+    }
+  ],
+  "experience": [
+    {
+      "company": "ViitorCloud Technologies Pvt. Ltd.",
+      "companyNote": "via Intech Creative Services",
+      "role": "Software Engineer",
+      "location": "Ahmedabad, India",
+      "startDate": "Jan 2024",
+      "endDate": "Present"
+    },
+    {
+      "company": "Logicrays Pvt. Ltd.",
+      "role": "Full-Stack Web Developer",
+      "location": "Ahmedabad, India",
+      "startDate": "Mar 2021",
+      "endDate": "Dec 2023"
+    },
+    {
+      "company": "Twinio Tech Pvt. Ltd.",
+      "role": "Frontend Web Developer",
+      "location": "Remote",
+      "startDate": "Apr 2020",
+      "endDate": "Mar 2021"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Dynamic Terminal System",
+      "category": "Logistics & Terminal Operations Platform",
+      "period": "2024 – Present",
+      "description": "A multi-tenant, multi-site, multi-language platform that lets each terminal and facility run on its own configuration from a single codebase, currently serving 3 terminals.",
+      "highlights": [
+        "Developed CANDI, a component-based React framework that renders screens from JSON configuration instead of hardcoded components",
+        "Migrated the frontend to a micro-frontend architecture so each module builds and deploys independently, removing release coordination between module teams",
+        "Built the shared UI library — dynamic grids, forms, input controls, and layout utilities — rolled out across modules, with 6 developers building on it",
+        "Added filtering, sorting, pagination, column configuration, and persisted grid state so users keep their view between sessions",
+        "Implemented role-based authentication and authorization so access is controlled per site and per user role",
+        "Configured Webpack to output static HTML builds for deployment inside restricted, network-isolated terminal environments"
+      ],
+      "technologies": ["React", "PostgreSQL", "Java", "Microsoft Azure", "Webpack", "Micro-Frontends", "Node v22"]
+    },
+    {
+      "name": "Cerebital",
+      "category": "Operational Data UI Platform",
+      "period": "2024",
+      "description": "Dashboard frontend with resizable panels, dynamic grids, and drag-and-drop for tabs and rows, so users could rearrange layouts around their own workflow.",
+      "highlights": [
+        "Wrote the REST API in Node.js and Express using a routes / controllers / services structure, serving 18 endpoints to dashboards, Kanban boards, timelines, and analytics widgets",
+        "Added real-time data sync over Socket.io and moved aggregation to the server, reducing dashboard load time by 20% on datasets of 80,000 rows",
+        "Integrated visualization widgets using Chart.js, Recharts, D3, Vis.js, React-Flow, and Three.js, and converted Figma designs into responsive SCSS layouts",
+        "Secured the API with JWT authentication, role-based access control, and Express middleware (helmet, express-rate-limit, express-validator) for CORS policies, rate limiting, and input validation",
+        "Wrote unit and integration tests with Jest, React Testing Library, and Supertest, reaching 98% coverage across components, API routes, and middleware"
+      ],
+      "technologies": ["React", "Node.js", "Express", "PostgreSQL", "Socket.io", "Redux", "MUI", "SCSS", "JWT", "Jest", "Jira"]
+    },
+    {
+      "name": "Product Forecast Web App",
+      "category": "Enterprise Forecasting & Reporting Dashboard",
+      "period": "2023",
+      "description": "Sales forecasting dashboard with Scatter, Line/Bar, Forecast, Sankey, and Network charts so teams could compare the same projection across different views.",
+      "highlights": [
+        "Implemented hierarchical role-based access so each sales role only saw data at or below their level in the org structure, supporting 5 role tiers",
+        "Added date, product-category, and multi-parameter filters to let users narrow a forecast down to a specific segment",
+        "Built Excel import and export so users could download forecast data, edit it offline, and upload revisions back into the app, replacing a manual process that took 2 hours per cycle",
+        "Delivered the app as micro-frontends so individual dashboard modules could be released independently"
+      ],
+      "technologies": ["React", "TypeScript", "Redux", "PostgreSQL", "Micro-Frontends", "Jira"]
+    },
+    {
+      "name": "Social Media Platform for NFT Holders",
+      "category": "Web3 Community Application",
+      "period": "2023",
+      "description": "Wallet-based login with MetaMask and Coinbase Wallet, replacing passwords with signature-based authentication.",
+      "highlights": [
+        "Added an interactive world map showing where other holders of the same collection were located",
+        "Built real-time chat so holders could message each other and discuss collections directly in the app",
+        "Built a posts and comments system where users publish their own NFTs with images and descriptions, and reply to other holders' posts",
+        "Integrated the Moralis NFT API to pull live sales, ownership, and price data for each token"
+      ],
+      "technologies": ["Angular 13", "Web3", "Firebase", "Moralis"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Darshan Institute of Engineering and Technology",
+      "degree": "Bachelor of Engineering",
+      "field": "Computer Engineering",
+      "detail": "CGPA: 8.2 / 10",
+      "startDate": "Jul 2017",
+      "endDate": "Mar 2021",
+      "location": "Gujarat, India"
+    }
+  ],
+  "certifications": [],
+  "achievements": []
+}

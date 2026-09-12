@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Palette is deliberately near-monochrome: warm paper, near-black ink, and a
+ * single saturated accent that only ever appears on active/hover state. Colour
+ * carries meaning here instead of decoration.
+ */
+:root {
+  color-scheme: light;
+
+  --background: 250 249 246;
+  --surface: 244 243 239;
+  --surface-hover: 238 237 231;
+  --foreground: 18 18 17;
+  --muted: 120 118 111;
+  --border: 224 222 214;
+  --highlight: 226 74 34;
+
+  --container: 1240px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: 10 10 9;
+  --surface: 20 20 18;
+  --surface-hover: 28 28 25;
+  --foreground: 241 239 233;
+  --muted: 138 135 127;
+  --border: 38 38 34;
+  --highlight: 255 106 61;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keep anchor targets clear of the fixed header. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+::selection {
+  background: rgb(var(--highlight));
+  color: rgb(var(--background));
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--highlight));
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/*
+ * Display type: the hero and closing statement run far tighter than Tailwind's
+ * default leading/tracking, which is what separates editorial type from a
+ * scaled-up paragraph.
+ */
+.display {
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+
+/*
+ * Lets the browser skip style, layout and paint for sections that are still
+ * offscreen. `auto` in contain-intrinsic-size means the real size is
+ * remembered once measured, so the estimate is only used on first pass.
+ */
+.section-defer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+@media (min-width: 768px) {
+  .section-defer {
+    contain-intrinsic-size: auto 500px;
+  }
+}
+
+/* ---------------------------------------------------------------- motion --- */
+
+/*
+ * Scroll-reveal. Entrance motion is opt-in rather than disabled after the
+ * fact, so reduced-motion users never get the `opacity: 0` starting frame.
+ * `--reveal-delay` staggers siblings without a class per index.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 450ms var(--ease-out),
+      transform 450ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal="in"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /*
+   * Stagger group: the wrapper itself stays put and hands the motion to its
+   * direct children. Delays are enumerated rather than computed because CSS
+   * cannot multiply by an element's index; nine steps covers every list on the
+   * page and anything beyond simply lands on the last step.
+   */
+  [data-reveal-group] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  [data-reveal-group] > * {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 450ms var(--ease-out),
+      transform 450ms var(--ease-out);
+    transition-delay: 240ms;
+  }
+
+  [data-reveal-group][data-reveal="in"] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-reveal-group] > *:nth-child(1) { transition-delay: 0ms; }
+  [data-reveal-group] > *:nth-child(2) { transition-delay: 40ms; }
+  [data-reveal-group] > *:nth-child(3) { transition-delay: 80ms; }
+  [data-reveal-group] > *:nth-child(4) { transition-delay: 120ms; }
+  [data-reveal-group] > *:nth-child(5) { transition-delay: 150ms; }
+  [data-reveal-group] > *:nth-child(6) { transition-delay: 180ms; }
+  [data-reveal-group] > *:nth-child(7) { transition-delay: 200ms; }
+  [data-reveal-group] > *:nth-child(8) { transition-delay: 220ms; }
+  [data-reveal-group] > *:nth-child(9) { transition-delay: 240ms; }
+
+  /* Hero lines wipe up from behind a clipping mask instead of fading. */
+  .mask-line > span {
+    display: block;
+    transform: translateY(105%);
+    animation: mask-rise 700ms var(--ease-out) both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+@keyframes mask-rise {
+  to {
+    transform: none;
+  }
+}
+
+/* Staggered entrance for the mobile menu, which mounts on open. */
+@media (prefers-reduced-motion: no-preference) {
+  .menu-in {
+    animation: menu-in 500ms var(--ease-out) both;
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Underline that grows from the left and retracts to the right on exit. */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 300ms var(--ease-out);
+}
+
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/*
+ * Row hover wipe used by the experience and project lists: a background panel
+ * that scales in from the left, animating transform only so the rows never
+ * trigger layout while the pointer moves down the list.
+ */
+.row-wipe::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--surface));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms var(--ease-out);
+  z-index: -1;
+}
+
+.row-wipe:hover::before,
+.row-wipe:focus-within::before {
+  transform: scaleX(1);
+}
+
+/* Selected-work accordion: height + content fade on expand/collapse. */
+.project-accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 450ms var(--ease-out);
+}
+
+.project-accordion-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.project-accordion-panel > .project-accordion-panel-inner {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .project-accordion-body {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 350ms var(--ease-out),
+      transform 350ms var(--ease-out);
+  }
+
+  .project-accordion-panel[data-open="true"] .project-accordion-body {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
