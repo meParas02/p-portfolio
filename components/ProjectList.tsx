@@ -3,20 +3,10 @@
 import { useRef, useState } from "react";
 import ProjectEntry from "./ProjectEntry";
 import type { Project } from "@/lib/types";
+import { smoothScrollToElement } from "@/lib/smooth-scroll";
 
 const DEFAULT_OPEN_INDEX = 0;
 const ACCORDION_MS = 520;
-
-function pinUnderHeader(element: HTMLElement) {
-  const header = document.querySelector("header");
-  const offset = (header?.getBoundingClientRect().height ?? 80) + 12;
-  const top = window.scrollY + element.getBoundingClientRect().top - offset;
-  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ? "auto"
-    : "smooth";
-
-  window.scrollTo({ top: Math.max(0, top), behavior });
-}
 
 export default function ProjectList({ items }: { items: Project[] }) {
   const [openIndex, setOpenIndex] = useState(DEFAULT_OPEN_INDEX);
@@ -27,14 +17,14 @@ export default function ProjectList({ items }: { items: Project[] }) {
     setOpenIndex((current) => (current === index ? -1 : index));
 
     const target = itemRefs.current[index];
-    if (target) pinUnderHeader(target);
+    if (target) smoothScrollToElement(target);
 
     if (scrollTimer.current) window.clearTimeout(scrollTimer.current);
 
-    // Layout shifts as other panels collapse — pin again once heights settle.
+    // Other panels are still collapsing — retarget once heights settle.
     scrollTimer.current = window.setTimeout(() => {
       const settled = itemRefs.current[index];
-      if (settled) pinUnderHeader(settled);
+      if (settled) smoothScrollToElement(settled);
     }, ACCORDION_MS);
   };
 

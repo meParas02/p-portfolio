@@ -36,7 +36,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   /* Keep anchor targets clear of the fixed header. */
   scroll-padding-top: 5rem;
 }
@@ -79,14 +79,7 @@ body {
  * remembered once measured, so the estimate is only used on first pass.
  */
 .section-defer {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 900px;
-}
-
-@media (min-width: 768px) {
-  .section-defer {
-    contain-intrinsic-size: auto 500px;
-  }
+  content-visibility: visible;
 }
 
 /* ---------------------------------------------------------------- motion --- */
@@ -256,15 +249,11 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Manrope } from "next/font/google";
 import resume from "@/data/resume.json";
 import type { Resume } from "@/lib/types";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 const data = resume as Resume;
@@ -106,7 +107,7 @@ export default function RootLayout({
        * mismatches in the tree below are still reported.
        */}
       <body className="font-sans antialiased" suppressHydrationWarning>
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
