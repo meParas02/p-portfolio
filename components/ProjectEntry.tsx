@@ -1,23 +1,35 @@
 "use client";
 
+import type { Ref } from "react";
 import { ArrowUpRight, ChevronDown, Github } from "lucide-react";
 import type { Project } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { useAccordionPanel } from "./motion/useAccordionPanel";
 
 interface ProjectEntryProps {
   project: Project;
   index: number;
   isOpen: boolean;
   onToggle: () => void;
+  articleRef?: Ref<HTMLElement>;
 }
 
-export default function ProjectEntry({ project, index, isOpen, onToggle }: ProjectEntryProps) {
+export default function ProjectEntry({
+  project,
+  index,
+  isOpen,
+  onToggle,
+  articleRef,
+}: ProjectEntryProps) {
   const panelId = `project-panel-${index}`;
+  const defaultOpen = index === 0;
+  const { innerRef, panelStyle, onTransitionEnd } = useAccordionPanel(isOpen, defaultOpen);
 
   return (
     <article
+      ref={articleRef}
       className={cn(
-        "overflow-hidden rounded-2xl border transition-all duration-ui ease-out",
+        "scroll-mt-[5.75rem] overflow-hidden rounded-2xl border transition-all duration-500 ease-out",
         isOpen
           ? "border-foreground/20 bg-surface ring-1 ring-inset ring-foreground/5"
           : "border-border bg-background hover:border-foreground/15 hover:bg-surface/50"
@@ -29,12 +41,12 @@ export default function ProjectEntry({ project, index, isOpen, onToggle }: Proje
         aria-expanded={isOpen}
         aria-controls={panelId}
         onClick={onToggle}
-        className="grid w-full grid-cols-1 gap-x-8 gap-y-3 px-5 py-4 text-left sm:px-6 sm:py-5 lg:grid-cols-12"
+        className="grid w-full grid-cols-1 gap-x-6 gap-y-2 px-4 py-3 text-left sm:px-5 sm:py-3.5 lg:grid-cols-12"
       >
-        <div className="flex flex-wrap items-center gap-3 lg:col-span-3 lg:flex-col lg:items-start lg:gap-2">
+        <div className="flex flex-wrap items-center gap-2 lg:col-span-3 lg:flex-col lg:items-start lg:gap-1.5">
           <span
             className={cn(
-              "inline-flex items-center rounded-full border px-2.5 py-1 font-mono text-xs transition-colors duration-ui",
+              "inline-flex items-center rounded-full border px-2 py-0.5 font-mono text-[0.6875rem] transition-colors duration-500 ease-out",
               isOpen
                 ? "border-highlight/30 bg-highlight/10 text-highlight"
                 : "border-border bg-background text-highlight"
@@ -44,21 +56,23 @@ export default function ProjectEntry({ project, index, isOpen, onToggle }: Proje
             {String(index + 1).padStart(2, "0")}
           </span>
           {project.period && (
-            <span className="font-mono text-xs uppercase tracking-label text-muted">
+            <span className="font-mono text-[0.6875rem] uppercase tracking-label text-muted">
               {project.period}
             </span>
           )}
         </div>
 
-        <div className="flex items-start justify-between gap-4 lg:col-span-9">
+        <div className="flex items-start justify-between gap-3 lg:col-span-9">
           <div className="min-w-0">
-            <h3 className="text-row font-medium tracking-tight">{project.name}</h3>
-            {project.category && <p className="mt-1.5 text-sm text-muted">{project.category}</p>}
+            <h3 className="text-base font-medium tracking-tight sm:text-lg">{project.name}</h3>
+            {project.category && (
+              <p className="mt-1 text-xs text-muted sm:text-sm">{project.category}</p>
+            )}
           </div>
 
           <span
             className={cn(
-              "mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-ui",
+              "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-out sm:h-8 sm:w-8",
               isOpen
                 ? "border-foreground/20 bg-foreground text-background"
                 : "border-border bg-background text-muted"
@@ -66,8 +80,8 @@ export default function ProjectEntry({ project, index, isOpen, onToggle }: Proje
             aria-hidden="true"
           >
             <ChevronDown
-              size={16}
-              className={cn("transition-transform duration-ui", isOpen && "rotate-180")}
+              size={14}
+              className={cn("transition-transform duration-500 ease-out", isOpen && "rotate-180")}
             />
           </span>
         </div>
@@ -78,10 +92,15 @@ export default function ProjectEntry({ project, index, isOpen, onToggle }: Proje
         role="region"
         aria-labelledby={`project-trigger-${index}`}
         aria-hidden={!isOpen}
-        data-open={isOpen}
-        className={cn("project-accordion-panel", !isOpen && "pointer-events-none")}
+        style={panelStyle}
+        onTransitionEnd={onTransitionEnd}
+        className={cn(
+          "project-accordion-panel",
+          isOpen && "project-accordion-panel-open",
+          !isOpen && "pointer-events-none"
+        )}
       >
-        <div className="project-accordion-panel-inner">
+        <div ref={innerRef}>
           <div className="project-accordion-body border-t px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
             <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-12">
               <div className="hidden lg:block lg:col-span-3" aria-hidden="true" />
